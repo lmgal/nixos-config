@@ -1,8 +1,11 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     audacity
-    discord
     nodejs
-    obs-studio
+    (python3.withPackages (python-pkgs:
+      with python-pkgs; [
+        pandas
+        requests
+      ]))
   ];
 }

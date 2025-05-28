@@ -17,7 +17,7 @@ in {
     ./htop.nix
     ./hyprland
     ./kitty.nix
-    ./nvf.nix
+    ./nvim.nix
     ./rofi
     ./qt.nix
     ./scripts
