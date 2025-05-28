@@ -21,6 +21,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    p7zip # 7zip
     amfora # Fancy Terminal Browser For Gemini Protocol
     appimage-run # Needed For AppImage Support
     brave # Brave Browser
@@ -64,6 +65,7 @@
     usbutils # Good Tools For USB Devices
     v4l-utils # Used For Things Like OBS Virtual Camera
     wget # Tool For Fetching Files With Links
+    expect # Tool for running shell script while expecting output
     yazi #TUI File Manager
     ytmdl # Tool For Downloading Audio From YouTube
   ];
