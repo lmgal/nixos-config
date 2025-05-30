@@ -7,5 +7,6 @@
         pandas
         requests
       ]))
+    slack
   ];
 }

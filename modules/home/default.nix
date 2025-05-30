@@ -18,6 +18,7 @@ in {
     ./hyprland
     ./kitty.nix
     ./nvchad.nix
+    ./obs.nix
     ./rofi
     ./qt.nix
     ./scripts

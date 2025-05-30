@@ -9,9 +9,14 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix";
+    nvchad = {
+      url = "github:MOIS3Y/nvchad-on-steroids";
+      flake = false;
+    };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nvchad-starter.follows = "nvchad";
     };
   };
 

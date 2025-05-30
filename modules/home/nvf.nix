@@ -9,16 +9,21 @@
     enable = true;
 
     settings.vim = {
+      lsp.enable = true;
       vimAlias = true;
       viAlias = true;
       withNodeJs = true;
-      lineNumberMode = "number";
+      lineNumberMode = "relNumber";
       enableLuaLoader = true;
       preventJunkFiles = true;
       options = {
         tabstop = 4;
         shiftwidth = 2;
         wrap = false;
+      };
+
+      terminal.toggleterm = {
+        enable = true;
       };
 
       clipboard = {
@@ -30,14 +35,14 @@
         };
       };
 
-      maps = {
-        normal = {
-          "<leader>e" = {
-            action = "<CMD>Neotree toggle<CR>";
-            silent = false;
-          };
-        };
-      };
+      # maps = {
+      #   normal = {
+      #     "<leader>e" = {
+      #       action = "<CMD>Neotree toggle<CR>";
+      #       silent = false;
+      #     };
+      #   };
+      # };
 
       diagnostics = {
         enable = true;
@@ -67,71 +72,53 @@
           desc = "Search files by name";
         }
         {
-          key = "<leader>lg";
+          key = "<leader>fw";
           mode = ["n"];
           action = "<cmd>Telescope live_grep<cr>";
           desc = "Search files by contents";
         }
         {
-          key = "<leader>fe";
+          key = "<leader>gt";
+          mode = ["n"];
+          action = "<cmd>Telescope git_status<cr>";
+          desc = "telescope git status";
+        }
+        {
+          key = "<leader>cm";
+          mode = ["n"];
+          action = "<cmd>Telescope git_commits<cr>";
+          desc = "telescope git commits";
+        }
+        {
+          key = "<leader>fb";
+          mode = ["n"];
+          action = "<cmd>Telescope buffers<cr>";
+          desc = "Hide terminal";
+        }
+        {
+          key = "<C-n>";
           mode = ["n"];
           action = "<cmd>Neotree toggle<cr>";
           desc = "File browser toggle";
         }
         {
-          key = "<C-h>";
-          mode = ["i"];
-          action = "<Left>";
-          desc = "Move left in insert mode";
-        }
-        {
-          key = "<C-j>";
-          mode = ["i"];
-          action = "<Down>";
-          desc = "Move down in insert mode";
-        }
-        {
-          key = "<C-k>";
-          mode = ["i"];
-          action = "<Up>";
-          desc = "Move up in insert mode";
-        }
-        {
-          key = "<C-l>";
-          mode = ["i"];
-          action = "<Right>";
-          desc = "Move right in insert mode";
-        }
-        {
-          key = "<leader>dj";
+          key = "<A-i>";
           mode = ["n"];
-          action = "<cmd>Lspsaga diagnostic_jump_next<CR>";
-          desc = "Go to next diagnostic";
+          action = "<cmd>ToggleTerm direction=float<cr>";
+          desc = "Toggle terminal";
         }
         {
-          key = "<leader>dk";
-          mode = ["n"];
-          action = "<cmd>Lspsaga diagnostic_jump_prev<CR>";
-          desc = "Go to previous diagnostic";
-        }
-        {
-          key = "<leader>dl";
-          mode = ["n"];
-          action = "<cmd>Lspsaga show_line_diagnostics<CR>";
-          desc = "Show diagnostic details";
-        }
-        {
-          key = "<leader>dt";
-          mode = ["n"];
-          action = "<cmd>Trouble diagnostics toggle<cr>";
-          desc = "Toggle diagnostics list";
+          key = "<A-i>";
+          mode = ["t"];
+          action = "<C-\\><C-n><C-w>l";
+          desc = "Hide terminal";
         }
       ];
 
       telescope.enable = true;
 
       spellcheck = {
-        enable = true;
+        enable = false;
         languages = ["en"];
         programmingWordlist.enable = true;
       };
@@ -148,13 +135,11 @@
       };
 
       languages = {
-        enableLSP = true;
         enableFormat = true;
         enableTreesitter = true;
         enableExtraDiagnostics = true;
         nix.enable = true;
         clang.enable = true;
-        zig.enable = true;
         python.enable = true;
         markdown.enable = true;
         ts = {
@@ -166,11 +151,12 @@
         html.enable = true;
         lua.enable = true;
         css.enable = true;
-        typst.enable = true;
         rust = {
           enable = true;
           crates.enable = true;
         };
+        tailwind.enable = true;
+        php.enable = true;
       };
       visuals = {
         nvim-web-devicons.enable = true;
@@ -205,7 +191,7 @@
       dashboard.dashboard-nvim.enable = true;
       filetree.neo-tree.enable = true;
       notify = {
-        nvim-notify.enable = true;
+        nvim-notify.enable = false;
         nvim-notify.setupOpts.background_colour = "#${config.lib.stylix.colors.base01}";
       };
       utility = {
@@ -216,9 +202,10 @@
         surround.enable = true;
         diffview-nvim.enable = true;
         motion = {
-          hop.enable = true;
-          leap.enable = true;
+          hop.enable = false;
+          leap.enable = false;
           precognition.enable = false;
+          flash-nvim.enable = true;
         };
         images = {
           image-nvim.enable = false;
@@ -240,37 +227,11 @@
       };
 
       session = {
-        nvim-session-manager.enable = false;
+        nvim-session-manager.enable = true;
       };
       comments = {
-        comment-nvim.enable = true;
+        comment-nvim.enable = false;
       };
     };
-  };
-
-  # Source custom Lua explicitly
-  home.file.".config/nvim/init.lua" = {
-    text = ''
-      vim.notify("Main init.lua loaded", vim.log.levels.INFO)
-      pcall(require, "custom.init")
-    '';
-  };
-
-  home.file.".config/nvim/lua/custom/init.lua" = {
-    text = ''
-      -- Debug notification
-      vim.notify("Custom Lua loaded", vim.log.levels.INFO)
-      -- Diagnostics configuration (fallback)
-      vim.diagnostic.config({
-        virtual_text = {
-          spacing = 4,
-          prefix = "●"
-        },
-        signs = true,
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true
-      })
-    '';
   };
 }
