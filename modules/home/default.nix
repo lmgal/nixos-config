@@ -8,6 +8,7 @@ in {
     ./bat.nix
     ./btop.nix
     ./cava.nix
+    ./claude-code.nix
     ./emoji.nix
     ./fastfetch
     ./gh.nix
@@ -17,8 +18,7 @@ in {
     ./htop.nix
     ./hyprland
     ./kitty.nix
-    ./nvchad.nix
-    ./obs.nix
+    ./nvf.nix
     ./rofi
     ./qt.nix
     ./scripts
