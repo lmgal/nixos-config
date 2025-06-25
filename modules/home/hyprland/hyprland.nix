@@ -10,6 +10,9 @@
     keyboardLayout
     stylixImage
     ;
+  calibreBrowser = ''firefox -P "Calibre Cleaning"'';
+  musicBrowser = ''firefox -new-tab "https://music.youtube.com"'';
+  terminal = "ghostty";
 in {
   home.packages = with pkgs; [
     swww
@@ -51,12 +54,19 @@ in {
         "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user start hyprpolkitagent"
+        "nm-applet --indicator"
+        "hyprlock"
         "killall -q swww;sleep .5 && swww init"
         "killall -q waybar;sleep .5 && waybar"
         "killall -q swaync;sleep .5 && swaync"
-        "nm-applet --indicator"
         "pypr &"
         "sleep 1.5 && swww img ${stylixImage}"
+        # Calibre Cleaning Workspace
+        "[workspace 1 silent] ${calibreBrowser}"
+        "[workspace 1 silent] ${terminal}"
+        "[workspace 2 silent] slack"
+        # Music
+        "[workspace special silent] ${musicBrowser}"
       ];
 
       input = {

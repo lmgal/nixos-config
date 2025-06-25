@@ -1,12 +1,13 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     audacity
-    nodejs
-    (python3.withPackages (python-pkgs:
-      with python-pkgs; [
-        pandas
-        requests
-      ]))
     slack
+    droidcam
+    obs-studio
+    libreoffice-qt
+    hunspell
+    hunspellDicts.en_AU
+    librechat
+    age
   ];
 }

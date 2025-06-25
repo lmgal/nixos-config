@@ -18,17 +18,19 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    android_sdk.accept_license = true;
+  };
 
   environment.systemPackages = with pkgs; [
+    chromium
     p7zip # 7zip
     amfora # Fancy Terminal Browser For Gemini Protocol
     appimage-run # Needed For AppImage Support
     brave # Brave Browser
     brightnessctl # For Screen Brightness Control
     cliphist # Clipboard manager using rofi menu
-    cmatrix # Matrix Movie Effect In Terminal
-    cowsay # Great Fun Terminal Program
     docker-compose # Allows Controlling Docker From A Single File
     duf # Utility For Viewing Disk Usage In Terminal
     eza # Beautiful ls Replacement
@@ -37,8 +39,8 @@
     gedit # Simple Graphical Text Editor
     gimp # Great Photo Editor
     glxinfo #needed for inxi diag util
-    greetd.tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
     htop # Simple Terminal Based System Monitor
+    jq # Command-line JSON processor
     hyprpicker # Color Picker
     eog # For Image Viewing
     inxi # CLI System Information Tool
@@ -64,9 +66,24 @@
     unzip # Tool For Handling .zip Files
     usbutils # Good Tools For USB Devices
     v4l-utils # Used For Things Like OBS Virtual Camera
+    lazygit # Terminal based git gui
     wget # Tool For Fetching Files With Links
     expect # Tool for running shell script while expecting output
-    yazi #TUI File Manager
     ytmdl # Tool For Downloading Audio From YouTube
+    # Webcam
+    android-tools
+    nodejs
+    (python3.withPackages (python-pkgs:
+      with python-pkgs; [
+        pandas
+        requests
+      ]))
+    rocmPackages.rocminfo
+    clinfo
+    rocmPackages.clr.icd
+    unstable.claude-code
+    inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-with-fhs
+    go-crx3
+    nodePackages.node2nix
   ];
 }

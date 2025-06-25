@@ -18,6 +18,7 @@ in {
     ./htop.nix
     ./hyprland
     ./kitty.nix
+    ./mcp-servers.nix
     ./nvf.nix
     ./rofi
     ./qt.nix

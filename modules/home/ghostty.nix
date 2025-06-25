@@ -6,7 +6,7 @@
   home.file."./.config/ghostty/config".text = ''
 
     #theme = Aura
-    theme = Dracula
+    theme = Tomorrow Night Bright
     #theme = Aardvark Blue
     #theme = GruvboxDarkHard
     adjust-cell-height = 10%
@@ -57,6 +57,9 @@
 
     keybind = alt+s>e=equalize_splits
 
+    # Claude Code keybinding
+    keybind = shift+enter=text:\x0a
+
     # other
     #copy-on-select = clipboard
 
@@ -79,5 +82,8 @@
     unfocused-split-opacity = 0.5
     quick-terminal-position = center
     shell-integration-features = cursor,sudo
+
+    # SSH compatibility - use xterm-256color for better compatibility
+    term = xterm-256color
   '';
 }

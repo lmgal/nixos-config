@@ -1,13 +1,14 @@
 {
   inputs,
   config,
+  pkgs,
   ...
 }: {
   imports = [inputs.nvf.homeManagerModules.default];
 
   programs.nvf = {
     enable = true;
-
+    enableManpages = true;
     settings.vim = {
       lsp.enable = true;
       vimAlias = true;
@@ -16,14 +17,46 @@
       lineNumberMode = "relNumber";
       enableLuaLoader = true;
       preventJunkFiles = true;
+
+      theme = {
+        name = "catppuccin";
+        style = "mocha";
+      };
+
       options = {
-        tabstop = 4;
+        laststatus = 3;
+        showmode = false;
+
+        cursorline = true;
+        cursorlineopt = "number";
+
+        expandtab = true;
         shiftwidth = 2;
-        wrap = false;
+        smartindent = true;
+        tabstop = 2;
+        softtabstop = 2;
+
+        ignorecase = true;
+        smartcase = true;
+        mouse = "a";
+
+        number = true;
+        numberwidth = 2;
+        ruler = false;
+
+        signcolumn = "yes";
+        splitbelow = true;
+        splitright = true;
+        timeoutlen = 400;
+        undofile = true;
+
+        autoread = true;
+        updatetime = 250;
       };
 
       terminal.toggleterm = {
         enable = true;
+        setupOpts.direction = "float";
       };
 
       clipboard = {
@@ -34,15 +67,6 @@
           xsel.enable = true;
         };
       };
-
-      # maps = {
-      #   normal = {
-      #     "<leader>e" = {
-      #       action = "<CMD>Neotree toggle<CR>";
-      #       silent = false;
-      #     };
-      #   };
-      # };
 
       diagnostics = {
         enable = true;
@@ -58,12 +82,6 @@
           mode = ["i"];
           action = "<ESC>";
           desc = "Exit insert mode";
-        }
-        {
-          key = "<leader>nh";
-          mode = ["n"];
-          action = ":nohl<CR>";
-          desc = "Clear search highlights";
         }
         {
           key = "<leader>ff";
@@ -93,32 +111,56 @@
           key = "<leader>fb";
           mode = ["n"];
           action = "<cmd>Telescope buffers<cr>";
-          desc = "Hide terminal";
         }
         {
-          key = "<C-n>";
+          key = "<leader>fz";
           mode = ["n"];
-          action = "<cmd>Neotree toggle<cr>";
+          action = "<cmd>Telescope current_buffer_fuzzy_find<cr>";
+        }
+        {
+          key = "<c-n>";
+          mode = ["n"];
+          action = "<cmd>NvimTreeToggle<cr>";
           desc = "File browser toggle";
         }
         {
           key = "<A-i>";
           mode = ["n"];
-          action = "<cmd>ToggleTerm direction=float<cr>";
-          desc = "Toggle terminal";
+          action = ":ToggleTerm<cr>";
+          desc = "Show terminal";
         }
         {
           key = "<A-i>";
           mode = ["t"];
-          action = "<C-\\><C-n><C-w>l";
+          action = "<C-\\><C-n>:ToggleTerm<cr>";
           desc = "Hide terminal";
         }
+        {
+          key = "<Esc>";
+          mode = ["t"];
+          action = "<C-\\><C-n>";
+          desc = "Exit terminal mode";
+        }
+        # {
+        #   key = "<leader>cC";
+        #   mode = ["n"];
+        #   action = "<cmd>ClaudeCode --continue<cr>";
+        #   desc = "Continue Claude conversation";
+        # }
+        # {
+        #   key = "<leader>cV";
+        #   mode = ["n"];
+        #   action = "<cmd>ClaudeCode --verbose<cr>";
+        #   desc = "Claude verbose mode";
+        # }
       ];
 
-      telescope.enable = true;
+      telescope = {
+        enable = true;
+      };
 
       spellcheck = {
-        enable = false;
+        enable = true;
         languages = ["en"];
         programmingWordlist.enable = true;
       };
@@ -170,13 +212,11 @@
 
       statusline.lualine = {
         enable = true;
-        theme = "base16";
       };
 
       autopairs.nvim-autopairs.enable = true;
       autocomplete.nvim-cmp.enable = true;
       snippets.luasnip.enable = true;
-      tabline.nvimBufferline.enable = true;
       treesitter.context.enable = false;
       binds = {
         whichKey.enable = true;
@@ -189,7 +229,7 @@
       };
       projects.project-nvim.enable = true;
       dashboard.dashboard-nvim.enable = true;
-      filetree.neo-tree.enable = true;
+      filetree.nvimTree.enable = true;
       notify = {
         nvim-notify.enable = false;
         nvim-notify.setupOpts.background_colour = "#${config.lib.stylix.colors.base01}";
@@ -211,20 +251,6 @@
           image-nvim.enable = false;
         };
       };
-      ui = {
-        borders.enable = true;
-        noice.enable = true;
-        colorizer.enable = true;
-        illuminate.enable = true;
-        breadcrumbs = {
-          enable = false;
-          navbuddy.enable = false;
-        };
-        smartcolumn = {
-          enable = true;
-        };
-        fastaction.enable = true;
-      };
 
       session = {
         nvim-session-manager.enable = true;
@@ -232,6 +258,82 @@
       comments = {
         comment-nvim.enable = false;
       };
+
+      tabline.nvimBufferline = {
+        enable = true;
+        mappings = {
+          closeCurrent = "<leader>x";
+          cycleNext = "<tab>";
+          cyclePrevious = "<S-tab>";
+        };
+      };
+
+      assistant.copilot.enable = true;
+      # assistant.avante-nvim = {
+      #   enable = true;
+      #   setupOpts = {
+      #     provider = "ollama";
+      #     providers = {
+      #       ollama = {
+      #         endpoint = "http://localhost:11434";
+      #         model = "devstral:latest";
+      #       };
+      #     };
+      #   };
+      # };
+
+      extraPlugins = {
+        plenary-nvim = {
+          package = pkgs.vimPlugins.plenary-nvim;
+          setup = "";
+        };
+        claude-code-nvim = {
+          package = pkgs.vimUtils.buildVimPlugin {
+            name = "claude-code-nvim";
+            src = pkgs.fetchFromGitHub {
+              owner = "greggh";
+              repo = "claude-code.nvim";
+              rev = "275c47615f4424a0329290ce1d0c18a8320fd8b0";
+              sha256 = "14n96zq8yldzqf74rj52gz95n20ig1dk02n20rsjd7vraggad9cc";
+            };
+          };
+          setup = ''
+            require('claude-code').setup({
+              window = {
+                split_ratio = 0.5,
+                enter_insert = true
+              },
+              keymaps = {
+                toggle = {
+                  normal = "<leader>ac",
+                  terminal = "<leader>ac"
+                },
+                variants = {
+                  continue = "<leader>cC", -- Normal mode keymap for Claude Code with continue flag
+                  verbose = "<leader>cV",  -- Normal mode keymap for Claude Code with verbose flag
+                },
+              }
+            })
+          '';
+        };
+        snacks-nvim = {
+          package = pkgs.vimPlugins.snacks-nvim;
+          setup = "";
+        };
+      };
+
+      autocmds = [
+        {
+          event = ["FocusGained" "BufEnter" "CursorHold" "CursorHoldI"];
+          pattern = ["*"];
+          command = "if mode() != 'c' | checktime | endif";
+        }
+        {
+          event = ["FileChangedShellPost"];
+          pattern = ["*"];
+          command = "echohl WarningMsg | echo \"File changed on disk. Buffer reloaded.\" | echohl None";
+        }
+      ];
     };
   };
 }

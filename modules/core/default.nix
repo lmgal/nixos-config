@@ -8,6 +8,8 @@
     ./network.nix
     ./nfs.nix
     ./nh.nix
+    ./nixified-ai.nix
+    ./ollama.nix
     ./packages.nix
     ./printing.nix
     ./security.nix
@@ -22,5 +24,6 @@
     ./virtualisation.nix
     ./xserver.nix
     inputs.stylix.nixosModules.stylix
+    inputs.sops-nix.nixosModules.sops
   ];
 }

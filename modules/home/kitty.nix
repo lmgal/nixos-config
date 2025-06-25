@@ -19,6 +19,8 @@
       tab_bar_style = "powerline";
       #tab_bar_style = "fade";
       enabled_layouts = "splits";
+      # SSH compatibility - use xterm-256color for better compatibility
+      term = "xterm-256color";
     };
     extraConfig = ''
 

@@ -1,20 +1,3 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  home.sessionVariables = {
-    CLAUDE_DISABLE_CO_AUTHORSHIP = "1";
-  };
-  
-  # Create default CLAUDE.md with co-authorship instructions
-  home.file.".claude/default/CLAUDE.md".text = ''
-    # Claude Code Configuration
-    
-    ## Git Commit Guidelines
-    
-    - Do not include attribution to Claude in the commit message
-    - Do not add co-author attribution
-  '';
-}
+# This module is now deprecated in favor of mcp-servers.nix
+# which handles both Claude Code and Claude Desktop configuration
+{...}: {}
