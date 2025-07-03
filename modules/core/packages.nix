@@ -73,6 +73,7 @@
     # Webcam
     android-tools
     nodejs
+    poetry
     (python3.withPackages (python-pkgs:
       with python-pkgs; [
         pandas

@@ -1,6 +1,7 @@
 {inputs, ...}: {
   imports = [
     ./boot.nix
+    ./claude-openai-wrapper.nix
     ./flatpak.nix
     ./fonts.nix
     ./greetd.nix
