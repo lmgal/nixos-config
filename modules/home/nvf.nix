@@ -3,7 +3,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+in {
   imports = [inputs.nvf.homeManagerModules.default];
 
   programs.nvf = {
@@ -269,22 +271,14 @@
       };
 
       assistant.copilot.enable = true;
-      # assistant.avante-nvim = {
-      #   enable = true;
-      #   setupOpts = {
-      #     provider = "ollama";
-      #     providers = {
-      #       ollama = {
-      #         endpoint = "http://localhost:11434";
-      #         model = "devstral:latest";
-      #       };
-      #     };
-      #   };
-      # };
 
       extraPlugins = {
         plenary-nvim = {
           package = pkgs.vimPlugins.plenary-nvim;
+          setup = "";
+        };
+        nui-nvim = {
+          package = pkgs.vimPlugins.nui-nvim;
           setup = "";
         };
         claude-code-nvim = {
@@ -306,7 +300,6 @@
               keymaps = {
                 toggle = {
                   normal = "<leader>ac",
-                  terminal = "<leader>ac"
                 },
                 variants = {
                   continue = "<leader>cC", -- Normal mode keymap for Claude Code with continue flag
@@ -319,6 +312,28 @@
         snacks-nvim = {
           package = pkgs.vimPlugins.snacks-nvim;
           setup = "";
+        };
+        avante-nvim = {
+          package = unstable.vimPlugins.avante-nvim;
+          setup = ''
+            -- Set dummy API key for local provider
+            vim.env.OPENAI_API_KEY = "dummy-key-for-local-provider"
+
+            require('avante').setup({
+              provider = "openai",
+              providers = {
+                openai = {
+                  endpoint = "http://localhost:11435/v1",
+                  model = "claude-sonnet-4-20250514",
+                  timeout = 30000,
+                  max_tokens = 8192,
+                  extra_request_body = {
+                    temperature = 0.7,
+                  },
+                },
+              },
+            })
+          '';
         };
       };
 

@@ -57,7 +57,7 @@
           {
             nixpkgs.overlays = [
               overlay-unstable
-mcp-servers-nix.overlays.default 
+              mcp-servers-nix.overlays.default
             ];
           }
         ];
