@@ -16,6 +16,7 @@
     (import ./web-search.nix {inherit pkgs;})
     (import ./rofi-launcher.nix {inherit pkgs;})
     (import ./screenshootin.nix {inherit pkgs;})
+    (import ./claude-image-helper.nix {inherit pkgs;})
     (import ./terminal-same-dir.nix {inherit pkgs;})
   ];
 }

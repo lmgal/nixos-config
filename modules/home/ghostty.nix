@@ -85,5 +85,23 @@
 
     # SSH compatibility - use xterm-256color for better compatibility
     term = xterm-256color
+    # Image support - Configure memory limit for Kitty graphics protocol
+    # This allows terminals to display images using the Kitty graphics protocol
+    # 320MB is the default, increase if you work with many large images
+    image-storage-limit = 320971520
+
+    # Drag and Drop Support
+    # Ghostty supports drag and drop of files by default
+    # When you drag a file from your file manager into Ghostty, the file path
+    # is automatically inserted at the cursor position
+    # 
+    # For Claude Code image analysis:
+    # 1. Drag image files directly into Ghostty terminal running Claude Code
+    # 2. Use the screenshot keybindings to capture images for analysis:
+    #    - SUPER+SHIFT+S: Capture region for Claude (claude-image-helper region)
+    #    - SUPER+ALT+S: Capture full screen for Claude (claude-image-helper capture)
+    #    - SUPER+CTRL+S: Capture window for Claude (claude-image-helper window)
+    # 3. Use 'claude-image-helper last' to get the path of the last screenshot
+    # 4. Use 'claude-image-helper list' to see all recent Claude screenshots
   '';
 }
