@@ -29,26 +29,21 @@
         enable = true;
       };
 
-      # GitHub integration
-      github = {
-        enable = true;
-      };
+      # # GitHub integration
+      # github = {
+      #   enable = true;
+      # };
 
       # Time utilities
-      time = {
-        enable = true;
-        env = {
-          TZ = "Australia/Melbourne";
-        };
-      };
+      # time = {
+      #   enable = true;
+      #   env = {
+      #     TZ = "Australia/Melbourne";
+      #   };
+      # };
 
       # Memory/notes
       memory = {
-        enable = true;
-      };
-
-      # Brave search integration
-      brave-search = {
         enable = true;
       };
     };

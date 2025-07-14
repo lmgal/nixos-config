@@ -9,5 +9,7 @@
     hunspellDicts.en_AU
     librechat
     age
+    arduino-ide
+    zoom-us
   ];
 }

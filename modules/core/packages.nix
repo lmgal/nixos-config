@@ -84,7 +84,19 @@
     rocmPackages.clr.icd
     unstable.claude-code
     inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-with-fhs
+    (pkgs.makeDesktopItem {
+      name = "claude-desktop";
+      desktopName = "Claude";
+      exec = "claude-desktop %u";
+      icon = "claude-desktop";
+      comment = "Claude Desktop";
+      categories = ["Office" "Utility"];
+      mimeTypes = ["x-scheme-handler/claude"];
+    })
     go-crx3
     nodePackages.node2nix
+    lftp
+    rsync
+    php
   ];
 }
