@@ -49,8 +49,8 @@ To rebuild the NixOS system after making changes:
 
 ```bash
 # Using nix-helper (nh)
-nh os switch --hostname <profile>  # alias: fr
-j
+fr # alias for `nh os switch --hostname <profile>`
+
 # Direct flake rebuild
 sudo nixos-rebuild switch --flake ~/zaneyos/#<profile>
 ```
@@ -134,4 +134,3 @@ New installations use the `install-zaneyos.sh` script which:
 3. Generates hardware configuration
 4. Sets up user variables
 5. Rebuilds the system
-

@@ -6,11 +6,13 @@ in {
     ./bash.nix
     ./bashrc-personal.nix
     ./bat.nix
+    ./browser-control-mcp.nix
     ./btop.nix
     ./cava.nix
     ./claude-code.nix
     ./emoji.nix
     ./fastfetch
+    ./firefox.nix
     ./gh.nix
     ./ghostty.nix
     ./git.nix

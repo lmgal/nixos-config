@@ -3,6 +3,7 @@
   pkgs,
   config,
   lib,
+  browser-control-mcp,
   ...
 }: let
   # Define MCP servers configuration using mcp-servers-nix
@@ -50,28 +51,12 @@
 
     # Custom MCP servers not in the predefined list
     settings.servers = {
-      browsermcp = {
-        command = "${pkgs.lib.getExe' pkgs.nodejs "npx"}";
-        args = ["@browsermcp/mcp@latest"];
-      };
-
-      playwright = {
-        command = "${pkgs.lib.getExe' pkgs.nodejs "npx"}";
-        args = [
-          "@playwright/mcp@latest"
-          "--browser"
-          "chromium"
-          "--executable-path"
-          "${pkgs.chromium}/bin/chromium"
-        ];
-      };
-
-      puppeteer = {
-        command = "${pkgs.lib.getExe' pkgs.nodejs "npx"}";
-        args = [
-          "-y"
-          "@modelcontextprotocol/server-puppeteer"
-        ];
+      browser-control = {
+        command = "${pkgs.nodejs}/bin/node";
+        args = ["${browser-control-mcp}/dist/server.js"];
+        env = {
+          EXTENSION_SECRET = "40426403-bca4-4d2e-90a3-b2dc411c66d4"; # To be configured after Firefox extension installation
+        };
       };
     };
   };
@@ -96,7 +81,7 @@ in {
       --argjson servers "$MCP_SERVERS" \
       '. + {
         "includeCoAuthoredBy": false,
-        "model": "opus",
+        "model": "sonnet",
         "mcpServers": $servers
       }')
 
@@ -124,7 +109,7 @@ in {
     - Time utilities
     - Memory/notes functionality
     - Brave search integration
-    - Browser automation (browsermcp, playwright, puppeteer)
+    - Firefox browser control (requires Firefox extension installation)
   '';
 
   # Ensure environment variable for co-authorship is set
