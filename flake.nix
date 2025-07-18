@@ -10,10 +10,6 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix";
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixified-ai.url = "github:nixified-ai/flake";
     claude-desktop = {
       url = "github:k3d3/claude-desktop-linux-flake";

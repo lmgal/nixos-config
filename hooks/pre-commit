@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+# SSH Key Encryption Pre-commit Hook
+# Encrypts all SSH keys from ~/.ssh/ using age and stores in secrets/ssh/
+
+set -e
+
+# Configuration
+SSH_DIR="$HOME/.ssh"
+SECRETS_DIR="$(git rev-parse --show-toplevel)/secrets/ssh"
+AGE_KEY="age18948ypl8r3mk2ymtl3u5475u6vlecyx5uhp8e2874dhgp3npreequ6hvy2"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Check if age is available
+if ! command -v age &> /dev/null; then
+    echo -e "${RED}Error: age is not installed or not in PATH${NC}"
+    exit 1
+fi
+
+# Check if SSH directory exists
+if [[ ! -d "$SSH_DIR" ]]; then
+    echo -e "${YELLOW}Warning: SSH directory $SSH_DIR does not exist${NC}"
+    exit 0
+fi
+
+# Create secrets directory if it doesn't exist
+mkdir -p "$SECRETS_DIR"
+
+# Function to encrypt file if it has changed
+encrypt_file() {
+    local file="$1"
+    local filename=$(basename "$file")
+    local encrypted_file="$SECRETS_DIR/${filename}.age"
+    
+    # Skip if file doesn't exist or is empty
+    if [[ ! -f "$file" || ! -s "$file" ]]; then
+        return 0
+    fi
+    
+    # Check if encryption is needed (file is newer than encrypted version)
+    if [[ -f "$encrypted_file" && "$file" -ot "$encrypted_file" ]]; then
+        return 0
+    fi
+    
+    echo -e "${GREEN}Encrypting: $filename${NC}"
+    
+    # Encrypt the file
+    if age -r "$AGE_KEY" -o "$encrypted_file" "$file"; then
+        # Add to git staging area
+        git add "$encrypted_file"
+        echo -e "${GREEN}✓ Encrypted and staged: $filename${NC}"
+    else
+        echo -e "${RED}✗ Failed to encrypt: $filename${NC}"
+        return 1
+    fi
+}
+
+# Main encryption loop
+echo -e "${YELLOW}Checking SSH keys for encryption...${NC}"
+
+# Find all SSH key files
+find "$SSH_DIR" -maxdepth 1 -type f \( \
+    -name "id_*" -o \
+    -name "*.pub" -o \
+    -name "config" -o \
+    -name "known_hosts*" \
+\) | while read -r file; do
+    encrypt_file "$file"
+done
+
+# Check if any files were encrypted
+if [[ $(find "$SECRETS_DIR" -name "*.age" -type f | wc -l) -gt 0 ]]; then
+    echo -e "${GREEN}SSH key encryption completed successfully${NC}"
+else
+    echo -e "${YELLOW}No SSH keys found to encrypt${NC}"
+fi
+
+exit 0

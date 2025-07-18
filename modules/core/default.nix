@@ -15,6 +15,7 @@
     ./printing.nix
     ./security.nix
     ./services.nix
+    ./ssh-secrets.nix
     ./starfish.nix
     ./steam.nix
     ./stylix.nix
@@ -25,6 +26,5 @@
     ./virtualisation.nix
     ./xserver.nix
     inputs.stylix.nixosModules.stylix
-    inputs.sops-nix.nixosModules.sops
   ];
 }

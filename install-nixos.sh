@@ -72,6 +72,9 @@ echo "-----"
 echo "Cloning & Entering NixOS Configuration Repository"
 git clone https://github.com/yourusername/nixos-config.git nixos-config
 cd nixos-config || exit
+
+echo "Installing Git hooks..."
+./hooks/install-hooks.sh
 mkdir hosts/"$hostName"
 cp hosts/default/*.nix hosts/"$hostName"
 installusername=$(echo $USER)

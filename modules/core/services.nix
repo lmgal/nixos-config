@@ -9,6 +9,7 @@
     tumbler.enable = true; # Image/video preview
     gnome.gnome-keyring.enable = true;
     open-webui.enable = true;
+    ssh-secrets.enable = true; # SSH key decryption
 
     smartd = {
       enable =
