@@ -14,7 +14,7 @@
         enable = true;
         args = [
           "${config.home.homeDirectory}"
-          "${config.home.homeDirectory}/zaneyos"
+          "${config.home.homeDirectory}/nixos-config"
           "${config.home.homeDirectory}/calibre"
           "${config.home.homeDirectory}/Downloads"
         ];

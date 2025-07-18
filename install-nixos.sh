@@ -50,16 +50,16 @@ fi
 echo "-----"
 
 backupname=$(date "+%Y-%m-%d-%H-%M-%S")
-if [ -d "zaneyos" ]; then
+if [ -d "nixos-config" ]; then
   echo "Configuration exists, backing up to .config/nixos-backups folder."
   if [ -d ".config/nixos-backups" ]; then
     echo "Moving current version of configuration to backups folder."
-    mv "$HOME"/zaneyos .config/nixos-backups/"$backupname"
+    mv "$HOME"/nixos-config .config/nixos-backups/"$backupname"
     sleep 1
   else
     echo "Creating the backups folder & moving configuration to it."
     mkdir -p .config/nixos-backups
-    mv "$HOME"/zaneyos .config/nixos-backups/"$backupname"
+    mv "$HOME"/nixos-config .config/nixos-backups/"$backupname"
     sleep 1
   fi
 else
@@ -70,8 +70,8 @@ fi
 echo "-----"
 
 echo "Cloning & Entering NixOS Configuration Repository"
-git clone https://github.com/yourusername/nixos-config.git zaneyos
-cd zaneyos || exit
+git clone https://github.com/yourusername/nixos-config.git nixos-config
+cd nixos-config || exit
 mkdir hosts/"$hostName"
 cp hosts/default/*.nix hosts/"$hostName"
 installusername=$(echo $USER)
@@ -116,4 +116,4 @@ NIX_CONFIG="experimental-features = nix-command flakes"
 
 echo "-----"
 
-sudo nixos-rebuild switch --flake ~/zaneyos/#${profile}
+sudo nixos-rebuild switch --flake ~/nixos-config/#${profile}

@@ -5,7 +5,7 @@ code in this repository.
 
 ## Repository Overview
 
-ZaneyOS is a custom NixOS configuration system that provides a fully featured
+This is a custom NixOS configuration system that provides a fully featured
 desktop environment centered around Hyprland (a tiling Wayland compositor). The
 configuration is structured as a NixOS flake with modular components.
 
@@ -52,7 +52,7 @@ To rebuild the NixOS system after making changes:
 fr # alias for `nh os switch --hostname <profile>`
 
 # Direct flake rebuild
-sudo nixos-rebuild switch --flake ~/zaneyos/#<profile>
+sudo nixos-rebuild switch --flake ~/nixos-config/#<profile>
 ```
 
 ### Update System
@@ -64,8 +64,8 @@ To update packages and rebuild:
 nh os switch --hostname <profile> --update  # alias: fu
 
 # Direct flake update
-nix flake update ~/zaneyos
-sudo nixos-rebuild switch --flake ~/zaneyos/#<profile>
+nix flake update ~/nixos-config
+sudo nixos-rebuild switch --flake ~/nixos-config/#<profile>
 ```
 
 ### Garbage Collection
@@ -127,7 +127,7 @@ Claude Code is configured with:
 
 ## Installation
 
-New installations use the `install-zaneyos.sh` script which:
+New installations use the `install-nixos.sh` script which:
 
 1. Prompts for hostname and hardware profile
 2. Creates a new host configuration

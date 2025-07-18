@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(for:*)",
+      "Bash(do [ -d \"$dir\" ])",
+      "Bash(echo \"$dir exists\")",
+      "Bash(echo \"$dir does NOT exist\")",
+      "Bash(done)",
+      "Bash([ -d \"/home/lmgallos/Downloads\" ])",
+      "Bash(readlink:*)",
+      "Bash(echo $TZ)",
+      "Bash(grep:*)",
+      "Bash(claude mcp:*)",
+      "Bash(ls:*)",
+      "Bash(nix flake show:*)",
+      "Bash(fr)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "Bash(time pgrep:*)",
+      "Bash(/dev/null)",
+      "Bash(nix flake check:*)",
+      "Bash(true)",
+      "Bash(unzip:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": false
+}
