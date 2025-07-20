@@ -20,33 +20,16 @@
         ];
       };
 
-      # Git integration
-      git = {
-        enable = true;
-      };
-
-      # Web content fetching
-      fetch = {
-        enable = true;
-      };
-
       # # GitHub integration
       # github = {
       #   enable = true;
       # };
 
-      # Time utilities
-      # time = {
-      #   enable = true;
-      #   env = {
-      #     TZ = "Australia/Melbourne";
-      #   };
-      # };
-
-      # Memory/notes
-      memory = {
-        enable = true;
-      };
+      # Git integration
+      git.enable = true;
+      context7.enable = true;
+      memory.enable = true;
+      sequential-thinking.enable = true;
     };
 
     # Custom MCP servers not in the predefined list
@@ -56,6 +39,7 @@
         args = ["${browser-control-mcp}/dist/server.js"];
         env = {
           EXTENSION_SECRET = "40426403-bca4-4d2e-90a3-b2dc411c66d4"; # To be configured after Firefox extension installation
+          EXTENSION_PORT = "8089";
         };
       };
     };
@@ -67,22 +51,33 @@ in {
     force = true;
   };
 
-  # For Claude Code, we need to extract just the mcpServers part
-  # Use an activation script to generate the settings file
-  home.activation.claudeCodeSettings = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  # Generate global MCP servers in ~/.claude.json for Claude Code
+  home.activation.claudeCodeGlobalMcp = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    CLAUDE_CONFIG_FILE="${config.home.homeDirectory}/.claude.json"
+
+    # Create ~/.claude.json if it doesn't exist
+    if [ ! -f "$CLAUDE_CONFIG_FILE" ]; then
+      echo '{}' > "$CLAUDE_CONFIG_FILE"
+    fi
+
     # Read the MCP servers config
     MCP_CONFIG=$(cat ${mcpServersConfig})
 
-    # Extract just the mcpServers object
-    MCP_SERVERS=$(echo "$MCP_CONFIG" | ${pkgs.jq}/bin/jq '.mcpServers')
+    # Extract just the mcpServers object, excluding sequential-thinking and convert to Claude Code format
+    MCP_SERVERS=$(echo "$MCP_CONFIG" | ${pkgs.jq}/bin/jq '.mcpServers | del(.["sequential-thinking"]) | to_entries | map({key: .key, value: .value}) | from_entries')
 
-    # Create the Claude Code settings with MCP servers
+    # Update ~/.claude.json with the MCP servers
+    ${pkgs.jq}/bin/jq --argjson servers "$MCP_SERVERS" '. + {"mcpServers": $servers}' "$CLAUDE_CONFIG_FILE" > "$CLAUDE_CONFIG_FILE.tmp"
+    mv "$CLAUDE_CONFIG_FILE.tmp" "$CLAUDE_CONFIG_FILE"
+  '';
+
+  # Generate Claude Code settings
+  home.activation.claudeCodeSettings = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    # Create the Claude Code settings with general configuration only
     CLAUDE_SETTINGS=$(echo '{}' | ${pkgs.jq}/bin/jq \
-      --argjson servers "$MCP_SERVERS" \
       '. + {
         "includeCoAuthoredBy": false,
-        "model": "sonnet",
-        "mcpServers": $servers
+        "model": "sonnet"
       }')
 
     # Write the settings file
@@ -99,17 +94,10 @@ in {
     - Do not include attribution to Claude in the commit message
     - Do not add co-author attribution
 
-    ## MCP Servers
+    ## MCP Servers Guidelines
 
-    This Claude Code instance is configured with MCP servers for:
-    - Filesystem access to home directory and key project folders
-    - Git integration for version control operations
-    - Web content fetching
-    - GitHub API access
-    - Time utilities
-    - Memory/notes functionality
-    - Brave search integration
-    - Firefox browser control (requires Firefox extension installation)
+    - Use context7 for documentation as part of planning or coding
+    - Do not use sequential thinking
   '';
 
   # Ensure environment variable for co-authorship is set
