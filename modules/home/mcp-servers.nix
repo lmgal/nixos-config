@@ -71,37 +71,4 @@ in {
     mv "$CLAUDE_CONFIG_FILE.tmp" "$CLAUDE_CONFIG_FILE"
   '';
 
-  # Generate Claude Code settings
-  home.activation.claudeCodeSettings = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    # Create the Claude Code settings with general configuration only
-    CLAUDE_SETTINGS=$(echo '{}' | ${pkgs.jq}/bin/jq \
-      '. + {
-        "includeCoAuthoredBy": false,
-        "model": "sonnet"
-      }')
-
-    # Write the settings file
-    mkdir -p $HOME/.claude
-    echo "$CLAUDE_SETTINGS" > $HOME/.claude/settings.json
-  '';
-
-  # Also ensure the Claude Code CLAUDE.md is created
-  home.file.".claude/default/CLAUDE.md".text = ''
-    # Claude Code Configuration
-
-    ## Git Commit Guidelines
-
-    - Do not include attribution to Claude in the commit message
-    - Do not add co-author attribution
-
-    ## MCP Servers Guidelines
-
-    - Use context7 for documentation as part of planning or coding
-    - Do not use sequential thinking
-  '';
-
-  # Ensure environment variable for co-authorship is set
-  home.sessionVariables = {
-    CLAUDE_DISABLE_CO_AUTHORSHIP = "1";
-  };
 }
