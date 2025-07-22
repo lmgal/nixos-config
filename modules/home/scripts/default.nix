@@ -18,5 +18,6 @@
     (import ./screenshootin.nix {inherit pkgs;})
     (import ./claude-image-helper.nix {inherit pkgs;})
     (import ./terminal-same-dir.nix {inherit pkgs;})
+    (import ./ccdev.nix {inherit pkgs;})
   ];
 }

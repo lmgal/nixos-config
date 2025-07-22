@@ -97,5 +97,6 @@
     lftp
     rsync
     php
+    tmux
   ];
 }
