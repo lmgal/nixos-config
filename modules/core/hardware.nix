@@ -15,6 +15,7 @@
     amdgpu.opencl.enable = true;
     amdgpu.amdvlk.enable = true;
     opentabletdriver.enable = true;
+    opentabletdriver.daemon.enable = true;
   };
   local.hardware-clock.enable = false;
 }

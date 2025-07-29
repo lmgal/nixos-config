@@ -22,6 +22,7 @@ in {
     ./kitty.nix
     ./mcp-servers.nix
     ./nvf.nix
+    ./opentabletdriver.nix
     ./rofi
     ./qt.nix
     ./scripts
