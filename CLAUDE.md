@@ -38,7 +38,7 @@ The configuration is organized into three main components:
 - Multiple theme options via stylix
 - Multiple animation styles for Hyprland
 - Various waybar configuration options
-- AI tools integration (nixified-ai, ollama, claude-code)
+- AI tools integration (nixified-ai, ollama, claude-code with nixos MCP server)
 - Hardware-specific optimizations
 
 ## Common Commands
@@ -124,6 +124,43 @@ Claude Code is configured with:
 - Co-authorship disabled
 - Puppeteer configured for web browsing
 - Default CLAUDE.md with Git commit guidelines
+- **NixOS MCP Server**: Provides real-time access to the entire NixOS ecosystem
+
+## Working with NixOS Resources
+
+This configuration includes the **nixos MCP server**, which gives Claude authoritative access to NixOS ecosystem data. This prevents hallucinations and provides accurate, up-to-date information about:
+
+- **130,000+ NixOS packages** with search capabilities
+- **NixOS configuration options** with detailed documentation
+- **Home Manager settings** for user environment configuration
+- **nix-darwin options** for macOS configurations
+- **Package version history** with nixpkgs commit hashes for reproducible builds
+
+### Recommended Usage
+
+**Always leverage Claude's NixOS knowledge through the MCP server:**
+
+- **Package Discovery**: Ask Claude to search for packages instead of guessing names
+  - "Find packages related to video editing"
+  - "Search for Python development tools"
+
+- **Configuration Options**: Let Claude verify options exist before adding them
+  - "What options are available for configuring SSH?"
+  - "Show me Home Manager options for Git configuration"
+
+- **Version Management**: Request specific package versions for reproducible builds
+  - "Find the nixpkgs commit hash for Python 3.11.5"
+  - "What versions of Firefox are available in nixpkgs?"
+
+- **Documentation**: Ask Claude to explain configuration options and their usage
+  - "Explain the services.xserver.enable option"
+  - "What does programs.git.signing do in Home Manager?"
+
+**Best Practices:**
+- When uncertain about package availability, ask Claude to search first
+- For version-specific requirements, request package history through Claude
+- Use Claude to explore configuration options before implementing
+- Let Claude validate syntax and option compatibility
 
 ## Installation
 
