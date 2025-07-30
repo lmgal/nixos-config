@@ -3,7 +3,6 @@
   pkgs,
   config,
   lib,
-  browser-control-mcp,
   ...
 }: let
   # Define MCP servers configuration using mcp-servers-nix
@@ -34,14 +33,6 @@
 
     # Custom MCP servers not in the predefined list
     settings.servers = {
-      browser-control = {
-        command = "${pkgs.nodejs}/bin/node";
-        args = ["${browser-control-mcp}/dist/server.js"];
-        env = {
-          EXTENSION_SECRET = "40426403-bca4-4d2e-90a3-b2dc411c66d4"; # To be configured after Firefox extension installation
-          EXTENSION_PORT = "8089";
-        };
-      };
     };
   };
 in {

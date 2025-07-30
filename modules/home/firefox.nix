@@ -18,12 +18,6 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/surfingkeys_ff/latest.xpi";
           installation_mode = "force_installed";
         };
-        
-        # Browser Control MCP
-        "{6ba257e0-fbce-4d50-8471-25de7f024c1e}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/browser-control-mcp/latest.xpi";
-          installation_mode = "force_installed";
-        };
       };
     };
   };

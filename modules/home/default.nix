@@ -6,7 +6,6 @@ in {
     ./bash.nix
     ./bashrc-personal.nix
     ./bat.nix
-    ./browser-control-mcp.nix
     ./btop.nix
     ./cava.nix
     ./claude-code.nix
