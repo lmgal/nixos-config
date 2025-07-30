@@ -23,7 +23,7 @@ in {
       "$modifier,D,exec,droidcam"
       "$modifier,O,exec,obs"
       "$modifier,C,exec,hyprpicker -a"
-      "$modifier,G,exec,gimp"
+      "$modifier,G,exec,wl-kbptr -o modes=floating,click -o mode_floating.source=detect"
       "$modifier,T,exec,pypr toggle term"
       "$modifier,M,exec,pavucontrol"
       "$modifier,Q,killactive,"

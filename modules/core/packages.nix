@@ -67,6 +67,7 @@
     v4l-utils # Used For Things Like OBS Virtual Camera
     lazygit # Terminal based git gui
     wget # Tool For Fetching Files With Links
+    wl-kbptr # Control mouse pointer with keyboard on Wayland
     expect # Tool for running shell script while expecting output
     ytmdl # Tool For Downloading Audio From YouTube
     # Webcam

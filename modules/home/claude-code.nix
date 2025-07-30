@@ -10,7 +10,11 @@
     CLAUDE_SETTINGS=$(echo '{}' | ${pkgs.jq}/bin/jq \
       '. + {
         "includeCoAuthoredBy": false,
-        "model": "sonnet"
+        "model": "sonnet",
+        "permissions": {
+          "allow": ["WebFetch", "WebSearch", "mcp__filesystem__*", "mcp__context7__*"]
+        },
+        "enabledMcpjsonServers": ["filesystem", "context7"]
       }')
 
     # Write the settings file
