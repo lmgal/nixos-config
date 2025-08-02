@@ -24,6 +24,7 @@
 
   environment.systemPackages = with pkgs; [
     chromium
+    google-chrome
     p7zip # 7zip
     amfora # Fancy Terminal Browser For Gemini Protocol
     appimage-run # Needed For AppImage Support

@@ -33,6 +33,10 @@
 
     # Custom MCP servers not in the predefined list
     settings.servers = {
+      browsermcp = {
+        command = "npx";
+        args = ["@browsermcp/mcp@latest"];
+      };
     };
   };
 in {

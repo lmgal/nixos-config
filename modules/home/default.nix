@@ -8,6 +8,7 @@ in {
     ./bat.nix
     ./btop.nix
     ./cava.nix
+    ./chromium.nix
     ./claude-code.nix
     ./emoji.nix
     ./fastfetch
