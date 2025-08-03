@@ -231,7 +231,7 @@ in {
       };
       projects.project-nvim.enable = true;
       dashboard.dashboard-nvim.enable = true;
-      filetree.nvimTree.enable = true;
+      filetree.nvimTree.enable = false;
       notify = {
         nvim-notify.enable = false;
         nvim-notify.setupOpts.background_colour = "#${config.lib.stylix.colors.base01}";
@@ -242,6 +242,7 @@ in {
         vim-wakatime.enable = false;
         icon-picker.enable = true;
         surround.enable = true;
+        yazi-nvim.enable = true;
         diffview-nvim.enable = true;
         motion = {
           hop.enable = false;
@@ -255,7 +256,7 @@ in {
       };
 
       session = {
-        nvim-session-manager.enable = true;
+        nvim-session-manager.enable = false;
       };
       comments = {
         comment-nvim.enable = false;
@@ -312,6 +313,16 @@ in {
         snacks-nvim = {
           package = pkgs.vimPlugins.snacks-nvim;
           setup = "";
+        };
+        auto-session = {
+          package = pkgs.vimPlugins.auto-session;
+          setup = ''
+            require('auto-session').setup({
+              log_level = "error",
+              auto_session_suppress_dirs = { "~/", "/" },
+              auto_session_use_git_branch = false,
+            })
+          '';
         };
         avante-nvim = {
           package = unstable.vimPlugins.avante-nvim;

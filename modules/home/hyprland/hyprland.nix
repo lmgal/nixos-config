@@ -65,6 +65,7 @@ in {
         "[workspace 1 silent] ${calibreBrowser}"
         "[workspace 1 silent] ${terminal}"
         "[workspace 2 silent] slack"
+        "[workspace 3 silent] chromium"
         # Music
         "[workspace special silent] ${musicBrowser}"
       ];
