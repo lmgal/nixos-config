@@ -65,5 +65,4 @@ in {
     ${pkgs.jq}/bin/jq --argjson servers "$MCP_SERVERS" '. + {"mcpServers": $servers}' "$CLAUDE_CONFIG_FILE" > "$CLAUDE_CONFIG_FILE.tmp"
     mv "$CLAUDE_CONFIG_FILE.tmp" "$CLAUDE_CONFIG_FILE"
   '';
-
 }

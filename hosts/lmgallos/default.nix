@@ -11,4 +11,10 @@
     # Optional: Set API key if you don't want interactive prompt
     # apiKey = "your-api-key-here";
   };
+  
+  # Enable n8n workflow automation service
+  services.n8n = {
+    enable = true;
+    openFirewall = true;
+  };
 }
