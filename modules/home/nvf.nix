@@ -194,7 +194,10 @@ in {
         };
         html.enable = true;
         lua.enable = true;
-        css.enable = true;
+        css = {
+          enable = true;
+          format.enable = false; # Disable CSS formatting due to prettier package issue
+        };
         rust = {
           enable = true;
           crates.enable = true;

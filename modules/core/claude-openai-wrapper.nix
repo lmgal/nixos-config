@@ -29,7 +29,8 @@
       substituteInPlace pyproject.toml \
         --replace '"^0.27.2"' '">=0.27.2"' \
         --replace '"^0.32.0"' '">=0.32.0"' \
-        --replace '"^0.0.12"' '">=0.0.12"'
+        --replace '"^0.0.12"' '">=0.0.12"' \
+        --replace '"^0.0.14"' '">=0.0.14"'
       
       # Fix the f-string syntax error - just comment out the problematic debug line
       sed -i '148s/.*/#&/' main.py
@@ -45,12 +46,11 @@
       python-multipart
       (buildPythonPackage rec {
         pname = "claude_code_sdk";
-        version = "0.0.14";
+        version = "0.0.19";
         format = "wheel";
-        src = fetchPypi {
-          inherit pname version format;
-          python = "py3";
-          sha256 = "0b4rcjx32vr7c4b6zrcjlf67gvhfmam45p7jikkq9fsl14k3m8l3";
+        src = pkgs.fetchurl {
+          url = "https://files.pythonhosted.org/packages/a1/2d/e4826ae5d361b772218491e21a5dc6b8b98e66737e255bf2891c76b0305d/claude_code_sdk-0.0.19-py3-none-any.whl";
+          sha256 = "0n3aplhyfjad2zvs8rkqvqxhxaphfjh7qg95s3kjvrcr06xacldl";
         };
       })
     ];
