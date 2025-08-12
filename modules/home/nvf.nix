@@ -164,7 +164,7 @@ in {
       spellcheck = {
         enable = true;
         languages = ["en"];
-        programmingWordlist.enable = true;
+        programmingWordlist.enable = false; # Disabled due to missing spell files
       };
 
       lsp = {
