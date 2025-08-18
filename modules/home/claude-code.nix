@@ -10,7 +10,7 @@
     CLAUDE_SETTINGS=$(echo '{}' | ${pkgs.jq}/bin/jq \
       '. + {
         "includeCoAuthoredBy": false,
-        "model": "sonnet",
+        "model": "opusplan",
         "permissions": {
           "allow": ["WebFetch", "WebSearch", "mcp__filesystem__*", "mcp__context7__*"]
         },
@@ -114,3 +114,4 @@
     CLAUDE_DISABLE_CO_AUTHORSHIP = "1";
   };
 }
+
