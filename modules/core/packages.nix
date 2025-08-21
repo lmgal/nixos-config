@@ -100,5 +100,6 @@
     rsync
     php
     tmux
+    quickemu
   ];
 }
