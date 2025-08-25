@@ -11,5 +11,6 @@
     age
     arduino-ide
     zoom-us
+    calibre
   ];
 }

@@ -48,6 +48,7 @@
       fu = "nh os switch --hostname ${profile} --update";
       ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
       ccdev = "ccdev";
+      claude = "SHELL=/bin/bash claude";
       cat = "bat";
       man = "batman";
       ls = "eza --icons --group-directories-first -1";
