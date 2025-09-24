@@ -43,6 +43,7 @@
     jq # Command-line JSON processor
     hyprpicker # Color Picker
     eog # For Image Viewing
+    imagemagick # Image manipulation tools (includes identify)
     inxi # CLI System Information Tool
     killall # For Killing All Instances Of Programs
     libnotify # For Notifications
@@ -101,5 +102,6 @@
     php
     tmux
     quickemu
+    mariadb
   ];
 }
