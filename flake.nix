@@ -22,12 +22,16 @@
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
     };
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+    };
   };
 
   outputs = {
     nixpkgs,
     nixpkgs-unstable,
     mcp-servers-nix,
+    claude-code,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -57,6 +61,7 @@
           {
             nixpkgs.overlays = [
               overlay-unstable
+              claude-code.overlays.default
               mcp-servers-nix.overlays.default
             ];
           }
@@ -75,6 +80,7 @@
           {
             nixpkgs.overlays = [
               overlay-unstable
+              claude-code.overlays.default
               mcp-servers-nix.overlays.default
             ];
           }
@@ -93,6 +99,7 @@
           {
             nixpkgs.overlays = [
               overlay-unstable
+              claude-code.overlays.default
               mcp-servers-nix.overlays.default
             ];
           }
@@ -111,6 +118,7 @@
           {
             nixpkgs.overlays = [
               overlay-unstable
+              claude-code.overlays.default
               mcp-servers-nix.overlays.default
             ];
           }
@@ -129,6 +137,7 @@
           {
             nixpkgs.overlays = [
               overlay-unstable
+              claude-code.overlays.default
               mcp-servers-nix.overlays.default
             ];
           }

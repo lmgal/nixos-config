@@ -84,7 +84,7 @@
     rocmPackages.rocminfo
     clinfo
     rocmPackages.clr.icd
-    unstable.claude-code
+    claude-code
     # inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-with-fhs
     # (pkgs.makeDesktopItem {
     #   name = "claude-desktop";
@@ -95,6 +95,7 @@
     #   categories = ["Office" "Utility"];
     #   mimeTypes = ["x-scheme-handler/claude"];
     # })
+    go # Go programming language
     go-crx3
     nodePackages.node2nix
     lftp
@@ -103,5 +104,8 @@
     tmux
     quickemu
     mariadb
+    devenv
+    unstable.gemini-cli
+    unstable.ast-grep
   ];
 }

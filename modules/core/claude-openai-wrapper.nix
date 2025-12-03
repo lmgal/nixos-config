@@ -86,7 +86,7 @@ in {
     
     claudeCliPath = lib.mkOption {
       type = lib.types.str;
-      default = "${pkgs.unstable.claude-code}/bin/claude";
+      default = "${pkgs.claude-code}/bin/claude";
       description = "Path to Claude CLI executable";
     };
     
@@ -161,7 +161,7 @@ in {
       
       path = with pkgs; [
         nodejs
-        unstable.claude-code
+        claude-code
       ];
     };
   };
