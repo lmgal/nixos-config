@@ -75,6 +75,7 @@
     # Webcam
     android-tools
     nodejs
+    pnpm
     poetry
     (python3.withPackages (python-pkgs:
       with python-pkgs; [
@@ -101,6 +102,7 @@
     lftp
     rsync
     php
+    php84Packages.composer
     tmux
     quickemu
     mariadb
