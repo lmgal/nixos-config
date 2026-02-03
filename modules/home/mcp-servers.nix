@@ -24,8 +24,8 @@
       #   enable = true;
       # };
 
-      # Git integration
-      git.enable = true;
+      # Git integration (disabled: mcp-server-git requires gitpython>=3.1.45, only 3.1.44 available)
+      # git.enable = true;
       context7.enable = true;
       memory.enable = true;
       sequential-thinking.enable = true;
