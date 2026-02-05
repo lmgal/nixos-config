@@ -28,7 +28,6 @@
       # git.enable = true;
       context7.enable = true;
       memory.enable = true;
-      sequential-thinking.enable = true;
     };
 
     # Custom MCP servers not in the predefined list
@@ -58,8 +57,8 @@ in {
     # Read the MCP servers config
     MCP_CONFIG=$(cat ${mcpServersConfig})
 
-    # Extract just the mcpServers object, excluding sequential-thinking and convert to Claude Code format
-    MCP_SERVERS=$(echo "$MCP_CONFIG" | ${pkgs.jq}/bin/jq '.mcpServers | del(.["sequential-thinking"]) | to_entries | map({key: .key, value: .value}) | from_entries')
+    # Extract just the mcpServers object and convert to Claude Code format
+    MCP_SERVERS=$(echo "$MCP_CONFIG" | ${pkgs.jq}/bin/jq '.mcpServers')
 
     # Update ~/.claude.json with the MCP servers
     ${pkgs.jq}/bin/jq --argjson servers "$MCP_SERVERS" '. + {"mcpServers": $servers}' "$CLAUDE_CONFIG_FILE" > "$CLAUDE_CONFIG_FILE.tmp"

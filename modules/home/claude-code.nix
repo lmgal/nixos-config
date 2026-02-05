@@ -34,7 +34,6 @@
     ## MCP Servers Guidelines
 
     - Use context7 for documentation as part of planning or coding
-    - Do not use sequential thinking
   '';
 
   # Ensure environment variable for co-authorship is set
